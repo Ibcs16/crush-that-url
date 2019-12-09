@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:12.9.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -27,10 +27,12 @@ jobs:
             - v1-dependencies-
 
       - run: yarn install
+      - run: yarn run build
 
       - save_cache:
           paths:
             - node_modules
+            - package.json
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
