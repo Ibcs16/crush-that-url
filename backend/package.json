@@ -6,6 +6,7 @@
   "dependencies": {
     "@sentry/node": "5.7.1",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "date-fns": "^2.6.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -13,6 +14,7 @@
     "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.7",
+    "redis": "^2.8.0",
     "shortid": "^2.2.15",
     "valid-url": "^1.0.9",
     "youch": "^2.0.10",

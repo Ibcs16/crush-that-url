@@ -1,6 +1,7 @@
 import validateUrl from 'valid-url';
 import shortid from 'shortid';
 import Url from '../models/Url';
+import client from '../../config/redis';
 
 require('dotenv').config();
 
@@ -22,6 +23,8 @@ export default {
         if (!url) {
           return res.status(404).json({ error: 'Url not found' });
         }
+
+        await client.set(`url:${code}`, longUrl);
 
         return res.json(url);
       } catch (err) {

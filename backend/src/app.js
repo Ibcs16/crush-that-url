@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import routes from './routes';
 import connectToDb from './config/db';
 
@@ -14,6 +15,8 @@ class AppController {
   }
 
   middlewares() {
+    // allowing access from unkown origins
+    this.express.use(cors());
     // give express the hability to deal with json
     this.express.use(express.json());
   }
