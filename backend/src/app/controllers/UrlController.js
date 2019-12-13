@@ -26,6 +26,8 @@ export default {
 
         await client.set(`url:${code}`, longUrl);
 
+        req.io.emit('crated_url', url);
+
         return res.json(url);
       } catch (err) {
         console.error(err);
