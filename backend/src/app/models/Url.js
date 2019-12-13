@@ -8,6 +8,20 @@ const UrlSchema = new mongoose.Schema({
       type: Number,
       default: 0,
     },
+    accesses: [
+      {
+        ip: String,
+        browser: String,
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+        country: {
+          name: String,
+          code: String,
+        },
+      },
+    ],
   },
 });
 
