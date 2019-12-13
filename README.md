@@ -1,2 +1,2 @@
 # crush-that-url
-Url shortner service
+Url shortener service
