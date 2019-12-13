@@ -3,7 +3,9 @@ import shortid from 'shortid';
 import Url from '../models/Url';
 import client from '../../config/redis';
 
-require('dotenv').config();
+require('dotenv').config({
+  path: process.env.NODE_ENV ==='test' ? '.env.test' : '.env'
+});
 
 export default {
   async store(req, res) {
