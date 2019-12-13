@@ -23,6 +23,14 @@ const UrlSchema = new mongoose.Schema({
       },
     ],
   },
+  isPrivate: {
+    type: Boolean,
+    default: false,
+  },
+  accessKey: {
+    type: String,
+    default: '',
+  },
 });
 
 export default mongoose.model('Url', UrlSchema);
