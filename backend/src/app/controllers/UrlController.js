@@ -7,26 +7,34 @@ require('dotenv').config();
 
 export default {
   async store(req, res) {
-    const { longUrl } = req.body;
+    const { longUrl, isPrivate, accessKey } = req.body;
 
     // Check if it's an actual url
     if (validateUrl.isUri(longUrl)) {
       try {
         // Generates new ID
+        let url = Url.findOne({ longUrl });
+
+        if (url) {
+          return res.json({ error: '500', message: 'Already a crush.it url' });
+        }
+
         const code = shortid.generate();
-        const url = await Url.create({
+        url = await Url.create({
           shortUrl: `${process.env.BASE_URL}/${code}`,
           longUrl,
+          isPrivate,
+          accessKey,
         });
 
         // If not found, send error
         if (!url) {
-          return res.status(404).json({ error: 'Url not found' });
+          return res.status(404).json({ error: 'unable to save this url' });
         }
 
         await client.set(`url:${code}`, longUrl);
 
-        req.io.emit('crated_url', url);
+        // req.io.emit('created_url', url);
 
         return res.json(url);
       } catch (err) {
