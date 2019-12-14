@@ -1,4 +1,4 @@
-import validateUrl from 'valid-url';
+import validateUrl from 'is-valid-http-url';
 import Url from '../models/Url';
 import client from '../../config/redis';
 
@@ -12,7 +12,7 @@ export default {
     const shortUrl = `${process.env.BASE_URL}/${code}`;
 
     // Check if it's an actual url
-    if (validateUrl.isUri(shortUrl)) {
+    if (validateUrl(shortUrl)) {
       // First, search it in redis cache
       return client.get(`url:${code}`, async (err, result) => {
         let url = null;
@@ -24,8 +24,15 @@ export default {
         } else {
           // Key does not exist in Redis store
           // Fetch directly from db
+
+          // // If not found, send error
           try {
             url = await Url.findOne({ shortUrl });
+            
+            if (!url) {
+              return res.status(404).json({ error: 'Url not found', shortUrl });
+            }
+            
             await client.set(`url:${code}`, url.longUrl);
           } catch (error) {
             console.error(error);
@@ -33,10 +40,7 @@ export default {
           }
         }
 
-        // // If not found, send error
-        if (!url) {
-          return res.status(404).json({ error: 'Url not found', shortUrl });
-        }
+        
 
         // // otherwise
         // // imcrements number of clicks on the url
@@ -44,7 +48,7 @@ export default {
         // await url.save();
 
         // redirects user to actual website
-        return res.redirect(url.longUrl);
+        return res.status(302).redirect(url.longUrl);
       });
     }
     return res.status(401).json({ error: 'Invalid url' });
