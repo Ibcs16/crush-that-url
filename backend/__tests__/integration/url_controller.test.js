@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import faker from 'faker';
 import shortid from 'shortid';
-import validateUrl from 'valid-url';
+import validateUrl from 'is-valid-http-url';
 import request from 'supertest';
 import Url from '../../src/app/models/Url';
 import app from '../../src/app';
+import connectToDb from '../../src/config/db';
 
 const databaseName = 'test';
 // If used, shouldn't import Url from model in this current file
@@ -19,11 +20,7 @@ require('dotenv').config({
 describe('URL creation', () => {
   // connects to test database
   beforeAll(async () => {
-    const url = `${process.env.MONGO_URI}`;
-    await mongoose.connect(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    connectToDb();
   });
 
   // Cleans up database between each test
@@ -39,9 +36,8 @@ describe('URL creation', () => {
 
   // legible name to the test
   it(' should return a new URL item when @route /create is called with valid URL', async () => {
-    const longUrl =
-      'https://medium.com/@lucaspenzeymoog/mocking-api-requests-with-jest-452ca2a8c7d7'; // faker.internet.url();
-    expect(validateUrl.isUri(longUrl)).toBeTruthy();
+    const longUrl = faker.internet.url();
+    expect(validateUrl(longUrl)).toBeTruthy();
 
     const res = await request(app)
       .post('/create')
@@ -52,24 +48,43 @@ describe('URL creation', () => {
     expect(res.body.longUrl).toBeTruthy();
     expect(res.body.shortUrl).toBeTruthy();
 
-    const url = await Url.findOne({ shortUrl: res.body.shortUrl });
-
-    expect(url.longUrl).toBeTruthy();
-    expect(url.shortUrl).toBeTruthy();
-
-
 
   });
 
   // legible name to the test
-  it(' should return a new URL item when @route /create is called with invalid URL', async () => {
+  it(' should return error when @route /create is called with invalid URL', async () => {
     const longUrl = 'kpoaksodpdas';
-    expect(validateUrl.isUri(longUrl)).toBeFalsy();
+    expect(validateUrl(longUrl)).toBeFalsy();
 
     const res = await request(app)
       .post('/create')
       .send({ longUrl });
 
     expect(res.status).toBe(401);
+  });
+
+
+  // legible name to the test
+  it(' should return 500 if URL has already been created', async () => {
+    const longUrl =
+      faker.internet.url(); // faker.internet.url();
+    const code = shortid.generate();
+    const shortUrl = `${process.env.BASE_URL}/${code}`;
+    
+    const url = await Url.create({
+        longUrl,
+        code,
+        shortUrl
+    });
+
+    expect(url.longUrl).toBeTruthy();
+
+    const res = await request(app)
+      .post('/create')
+      .send({ longUrl });
+
+    expect(res.status).toBe(200);
+    expect(res.body.error).toBeTruthy();
+   
   });
 });
