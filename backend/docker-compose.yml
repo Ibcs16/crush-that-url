@@ -1,0 +1,17 @@
+version: "3"
+
+service: 
+    app:
+        build: .
+        ports:
+            - "3000:3000"
+        links:
+            - redis
+            - mongo
+        command: yarn start
+    mongo:
+        container_name: crushit-mongo
+        image: 'mongo:4'
+    redis:
+        container_name: crushit-redis
+        image: 'redis:4.0.11'
