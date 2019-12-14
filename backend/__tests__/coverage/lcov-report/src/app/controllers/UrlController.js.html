@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.37% </span>
+        <span class="strong">85.19% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>19/27</span>
+        <span class='fraction'>23/27</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/12</span>
+        <span class='fraction'>9/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,16 +35,16 @@
         <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">61.9% </span>
+        <span class="strong">80.95% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>13/21</span>
+        <span class='fraction'>17/21</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,31 +112,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -152,7 +152,7 @@ import Url from '../models/Url';
 import client from '../../config/redis';
 &nbsp;
 require('dotenv').config({
-  path: process.env.NODE_ENV ==='test' ? '.env.test' : <span class="branch-1 cbranch-no" title="branch not covered" >'.env'</span>
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : <span class="branch-1 cbranch-no" title="branch not covered" >'.env',</span>
 });
 &nbsp;
 export default {
@@ -162,15 +162,15 @@ export default {
     // Check if it's an actual url
     if (validateUrl.isUri(longUrl)) {
       try {
-        // Generates new ID
-        let url = Url.findOne({ longUrl });
+        let url = await Url.findOne({ longUrl });
 &nbsp;
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (url) {
-          return res.json({ error: '500', message: 'Already a crush.it url' });
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (url) {
+<span class="cstat-no" title="statement not covered" >          return res.json({ error: '500', message: 'Already a crush.it url' });</span>
         }
+        // Generates new ID
 &nbsp;
-        const code = <span class="cstat-no" title="statement not covered" >shortid.generate();</span>
-<span class="cstat-no" title="statement not covered" >        url = await Url.create({</span>
+        const code = shortid.generate();
+        url = await Url.create({
           shortUrl: `${process.env.BASE_URL}/${code}`,
           longUrl,
           isPrivate,
@@ -178,15 +178,15 @@ export default {
         });
 &nbsp;
         // If not found, send error
-<span class="cstat-no" title="statement not covered" >        if (!url) {</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!url) {
 <span class="cstat-no" title="statement not covered" >          return res.status(404).json({ error: 'unable to save this url' });</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        await client.set(`url:${code}`, longUrl);</span>
+        await client.set(`url:${code}`, longUrl);
 &nbsp;
         // req.io.emit('created_url', url);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return res.json(url);</span>
+        return res.json(url);
       } catch (err) {
 <span class="cstat-no" title="statement not covered" >        console.error(err);</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(500).json({ error: 'Server error' });</span>
@@ -202,7 +202,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Dec 13 2019 18:37:58 GMT-0300 (Horário Padrão de Brasília)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Dec 14 2019 00:47:12 GMT-0200 (GMT-02:00)
 </div>
 </div>
 <script src="..\..\..\prettify.js"></script>

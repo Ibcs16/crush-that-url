@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1576273078369" clover="3.2.0">
-  <project timestamp="1576273078369" name="All files">
-    <metrics statements="106" coveredstatements="64" conditionals="60" coveredconditionals="31" methods="23" coveredmethods="15" elements="189" coveredelements="110" complexity="0" loc="106" ncloc="106" packages="4" files="9" classes="9"/>
+<coverage generated="1576291632375" clover="3.2.0">
+  <project timestamp="1576291632375" name="All files">
+    <metrics statements="106" coveredstatements="68" conditionals="60" coveredconditionals="32" methods="23" coveredmethods="15" elements="189" coveredelements="115" complexity="0" loc="106" ncloc="106" packages="4" files="9" classes="9"/>
     <package name="src">
       <metrics statements="34" coveredstatements="30" conditionals="14" coveredconditionals="8" methods="10" coveredmethods="7"/>
       <file name="app.js" path="C:\projetos\crush-that-url\backend\src\app.js">
@@ -49,7 +49,7 @@
       </file>
     </package>
     <package name="src.app.controllers">
-      <metrics statements="53" coveredstatements="18" conditionals="32" coveredconditionals="13" methods="7" coveredmethods="3"/>
+      <metrics statements="53" coveredstatements="22" conditionals="32" coveredconditionals="14" methods="7" coveredmethods="3"/>
       <file name="AnalyticsController.js" path="C:\projetos\crush-that-url\backend\src\app\controllers\AnalyticsController.js">
         <metrics statements="10" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="4"/>
@@ -89,7 +89,7 @@
         <line num="50" count="0" type="stmt"/>
       </file>
       <file name="UrlController.js" path="C:\projetos\crush-that-url\backend\src\app\controllers\UrlController.js">
-        <metrics statements="21" coveredstatements="13" conditionals="12" coveredconditionals="8" methods="2" coveredmethods="2"/>
+        <metrics statements="21" coveredstatements="17" conditionals="12" coveredconditionals="9" methods="2" coveredmethods="2"/>
         <line num="1" count="4" type="cond" truecount="4" falsecount="0"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -99,15 +99,15 @@
         <line num="12" count="2" type="stmt"/>
         <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
