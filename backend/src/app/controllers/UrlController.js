@@ -1,4 +1,4 @@
-import validateUrl from 'valid-url';
+import validateUrl from 'is-valid-http-url';
 import shortid from 'shortid';
 import Url from '../models/Url';
 import client from '../../config/redis';
@@ -12,35 +12,33 @@ export default {
     const { longUrl, isPrivate, accessKey } = req.body;
 
     // Check if it's an actual url
-    if (validateUrl.isUri(longUrl)) {
+    if (validateUrl(longUrl)) {
       try {
         let url = await Url.findOne({ longUrl });
 
         if (url) {
-          return res.json({ error: '500', message: 'Already a crush.it url' });
+          return res.json({ error: '500', message: 'This URL has already been shortned' });
         }
-        // Generates new ID
 
+        // Generates new ID
         const code = shortid.generate();
         url = await Url.create({
           shortUrl: `${process.env.BASE_URL}/${code}`,
           longUrl,
           isPrivate,
           accessKey,
+          code,
         });
 
-        // If not found, send error
+        // If not created
         if (!url) {
-          return res.status(404).json({ error: 'unable to save this url' });
+          return res.status(500).json({ error: 'Unable to save this url' });
         }
 
         await client.set(`url:${code}`, longUrl);
 
-        // req.io.emit('created_url', url);
-
         return res.json(url);
       } catch (err) {
-        console.error(err);
         return res.status(500).json({ error: 'Server error' });
       }
     } else {
