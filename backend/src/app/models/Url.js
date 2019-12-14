@@ -1,8 +1,18 @@
 import mongoose from 'mongoose';
 
 const UrlSchema = new mongoose.Schema({
-  shortUrl: String,
-  longUrl: String,
+  shortUrl: {
+    type: String,
+    required: true,
+  },
+  longUrl: {
+    type: String,
+    required: true,
+  },
+  code: {
+    type: String,
+    required: true,
+  },
   analytics: {
     clicks: {
       type: Number,
