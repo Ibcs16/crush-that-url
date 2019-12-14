@@ -25,6 +25,7 @@ module.exports = {
     "class-methods-use-this": "off",
     "no-param-reassign": "off",
     "camelcase": "off",
+    "no-undef": ["error", {"argsIgnorePattern": ["describe", "it", "expect", "beforeAll", "afterAll", "afterEach"]}],
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" } ]
   },
 };

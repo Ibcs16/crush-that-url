@@ -4,7 +4,7 @@ import Url from '../models/Url';
 import client from '../../config/redis';
 
 require('dotenv').config({
-  path: process.env.NODE_ENV ==='test' ? '.env.test' : '.env'
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
 });
 
 export default {
@@ -14,12 +14,12 @@ export default {
     // Check if it's an actual url
     if (validateUrl.isUri(longUrl)) {
       try {
-        // Generates new ID
-        let url = Url.findOne({ longUrl });
+        let url = await Url.findOne({ longUrl });
 
         if (url) {
           return res.json({ error: '500', message: 'Already a crush.it url' });
         }
+        // Generates new ID
 
         const code = shortid.generate();
         url = await Url.create({
