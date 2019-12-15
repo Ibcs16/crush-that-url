@@ -17,7 +17,7 @@ export default {
         let url = await Url.findOne({ longUrl });
 
         if (url) {
-          return res.json({ error: '500', message: 'This URL has already been shortned' });
+          return res.json({ error: '500', message: 'This URL has already been shortened' });
         }
 
         // Generates new ID
@@ -32,7 +32,7 @@ export default {
 
         // If not created
         if (!url) {
-          return res.status(500).json({ error: 'Unable to save this url' });
+          return res.status(500).json({ error: 'Unable to save this URL' });
         }
 
         await client.set(`url:${code}`, longUrl);
@@ -42,7 +42,7 @@ export default {
         return res.status(500).json({ error: 'Server error' });
       }
     } else {
-      return res.status(401).json({ error: 'Invalid url' });
+      return res.status(401).json({ error: 'Invalid URL' });
     }
   },
 };
