@@ -1,7 +1,7 @@
 import Url from '../models/Url';
 import bcrypt from 'bcryptjs';
 import { checkAccessKey } from '../utils/compare';
-import client from '../../config/redis';
+// import client from '../../config/redis';
 import validateUrl from 'is-valid-http-url';
 
 require('dotenv').config({
@@ -39,7 +39,7 @@ export default {
       }
 
       if (url.isPrivate) {
-        if(!accessKey){
+        if (!accessKey) {
           return res.status(401).json({ error: 'Must authenticate' });
         }
 
@@ -47,7 +47,7 @@ export default {
           return res.status(401).json({ error: 'Access key does not match' });
         }
       }
-      return res.status(302).json({ longUrl : url.longUrl });
+      return res.status(302).json({ longUrl: url.longUrl });
       // return res.status(302).redirect(url.longUrl);
       // await client.set(`url:${code}`, url.longUrl);
     } catch (error) {
