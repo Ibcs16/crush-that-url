@@ -1,9 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import io from 'socket.io';
-import http from 'http';
-import routes from './routes';
 import connectToDb from './config/db';
+import cors from 'cors';
+import express from 'express';
+import http from 'http';
+import io from 'socket.io';
+import requestIp from 'request-ip';
+import routes from './routes';
 
 class AppController {
   constructor() {
@@ -21,7 +22,6 @@ class AppController {
   }
 
   socket() {
-
     this.app.use((req, res, next) => {
       req.io = this.io;
       req.connectedUsers = this.connectedUsers;
@@ -35,7 +35,7 @@ class AppController {
     // Give server the ability to work with real-time
     // io.origins(['*']);
     this.io = io(this.server);
-    this.io.origins('http://localhost:3001')
+    this.io.origins('http://localhost:3001');
 
     // listen for io events
     this.io.on('connection', socket => {
@@ -45,18 +45,21 @@ class AppController {
       // listen for when client disconnects
       socket.on('disconnect', () => {});
     });
-
-
   }
 
   middlewares() {
-
     // allowing access from unkown origins
     this.app.use(cors());
     // give express the hability to deal with json
     this.app.use(express.json());
 
+    this.app.use((req, res, next) => {
+      const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
 
+      req.clientIp = ip;
+
+      next();
+    });
   }
 
   routes() {

@@ -1,7 +1,10 @@
 import Url from '../models/Url';
-import client from '../../config/redis';
 import shortid from 'shortid';
 import validateUrl from 'is-valid-http-url';
+
+// import client from '../../config/redis';
+
+
 
 require('dotenv').config({
   path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
@@ -28,7 +31,7 @@ export default {
 
       // Generates new ID
       const code = shortid.generate();
-      if(expirationDateTime) {
+      if (expirationDateTime) {
         url = await Url.create({
           shortUrl: `${process.env.BASE_URL}/${code}`,
           longUrl,
@@ -47,7 +50,6 @@ export default {
           code,
         });
       }
-
 
       // If not created
       if (!url) {

@@ -1,8 +1,9 @@
 import Url from '../models/Url';
 import bcrypt from 'bcryptjs';
 import { checkAccessKey } from '../utils/compare';
-// import client from '../../config/redis';
 import validateUrl from 'is-valid-http-url';
+
+// import client from '../../config/redis';
 
 require('dotenv').config({
   path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
@@ -10,7 +11,12 @@ require('dotenv').config({
 
 export default {
   async show(req, res) {
-    const { accessKey, name } = req.query;
+    const { accessKey, name } = req.body;
+
+    const { ip } = res;
+
+    const { ip: clientIp, browser, country } = req.body.info;
+
     const { code } = req.params;
     const shortUrl = `${process.env.BASE_URL}/${code}`;
 
@@ -47,6 +53,23 @@ export default {
           return res.status(401).json({ error: 'Access key does not match' });
         }
       }
+
+      url.analytics.clicks += 1;
+
+      url.analytics.accesses.push({
+        ip,
+        browser,
+        date: Date.now(),
+        country,
+        name,
+      });
+
+      try {
+        url.save();
+      } catch (err) {
+        console.error(err);
+      }
+
       return res.status(302).json({ longUrl: url.longUrl });
       // return res.status(302).redirect(url.longUrl);
       // await client.set(`url:${code}`, url.longUrl);
