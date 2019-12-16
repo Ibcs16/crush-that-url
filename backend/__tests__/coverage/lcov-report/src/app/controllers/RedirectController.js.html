@@ -20,19 +20,19 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">81.48% </span>
+        <span class="strong">82.14% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>22/27</span>
+        <span class='fraction'>23/28</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">64.29% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>9/12</span>
+        <span class='fraction'>9/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">77.27% </span>
@@ -102,7 +102,16 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,12 +123,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -128,16 +155,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -152,67 +171,69 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import validateUrl from 'is-valid-http-url';
-import Url from '../models/Url';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Url from '../models/Url';
+import bcrypt from 'bcryptjs';
+import { checkAccessKey } from '../utils/compare';
 import client from '../../config/redis';
+import validateUrl from 'is-valid-http-url';
 &nbsp;
 require('dotenv').config({
-  path: process.env.NODE_ENV ==='test' ? '.env.test' : <span class="branch-1 cbranch-no" title="branch not covered" >'.env'</span>
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : <span class="branch-1 cbranch-no" title="branch not covered" >'.env',</span>
 });
 &nbsp;
 export default {
   async show(req, res) {
+    const { name, accessKey } = req.body;
     const { code } = req.params;
     const shortUrl = `${process.env.BASE_URL}/${code}`;
 &nbsp;
-    // Check if it's an actual url
-    if (validateUrl(shortUrl)) {
-      // First, search it in redis cache
-      return client.get(`url:${code}`, async (err, result) =&gt; {
-        let url = null;
-&nbsp;
-        // If that key exist in Redis
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (result) {
-<span class="cstat-no" title="statement not covered" >          url = { longUrl: result };</span>
-<span class="cstat-no" title="statement not covered" >          console.log(`Code ${code}`, url.longUrl);</span>
-        } else {
-          // Key does not exist in Redis store
-          // Fetch directly from db
-&nbsp;
-          // // If not found, send error
-          try {
-            url = await Url.findOne({ shortUrl });
-            
-            <span class="missing-if-branch" title="if path not taken" >I</span>if (!url) {
-<span class="cstat-no" title="statement not covered" >              return res.status(404).json({ error: 'Url not found', shortUrl });</span>
-            }
-            
-            await client.set(`url:${code}`, url.longUrl);
-          } catch (error) {
-<span class="cstat-no" title="statement not covered" >            console.error(error);</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(500).json({ error: 'Server error' });</span>
-          }
-        }
-&nbsp;
-        
-&nbsp;
-        // // otherwise
-        // // imcrements number of clicks on the url
-        // await url.update({ $inc: { 'analytics.clicks': 1 } });
-        // await url.save();
-&nbsp;
-        // redirects user to actual website
-        return res.status(302).redirect(url.longUrl);
-      });
+    if (!validateUrl(shortUrl)) {
+      return res.status(401).json({ error: 'Invalid url' });
     }
-    return res.status(401).json({ error: 'Invalid url' });
+    // // Check if it's an actual url
+    // // First, search it in redis cache
+    // return client.get(`url:${code}`, async (err, result) =&gt; {
+    //   let url = null;
+&nbsp;
+    //   // If that key exist in Redis
+    //   if (result) {
+    //     url = { longUrl: result };
+    //     console.log(`Code ${code}`, url.longUrl);
+    //   } else {
+    // Key does not exist in Redis store
+    // Fetch directly from db
+&nbsp;
+    // // If not found, send error
+    try {
+      const url = await Url.findOne({ shortUrl });
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!url) {
+<span class="cstat-no" title="statement not covered" >        return res.status(404).json({ error: 'Url not found', shortUrl });</span>
+      }
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (url.isPrivate) {
+<span class="cstat-no" title="statement not covered" >        if (!(await checkAccessKey(accessKey, url.accessKey))) {</span>
+<span class="cstat-no" title="statement not covered" >          return res.status(401).json({ error: 'Access key does not match' });</span>
+        }
+      }
+&nbsp;
+      return res.status(302).redirect(url.longUrl);
+      // await client.set(`url:${code}`, url.longUrl);
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >      console.error(error);</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(500).json({ error: 'Server error' });</span>
+    }
   },
+&nbsp;
+  // // otherwise
+  // // imcrements number of clicks on the url
+  // await url.update({ $inc: { 'analytics.clicks': 1 } });
+  // await url.save();
+&nbsp;
+  // redirects user to actual website
+  //   });
+  // },
 };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -220,7 +241,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Dec 14 2019 13:19:44 GMT-0300 (Horário Padrão de Brasília)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Dec 15 2019 19:25:16 GMT-0300 (Horário Padrão de Brasília)
 </div>
 </div>
 <script src="..\..\..\prettify.js"></script>

@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 
 const UrlSchema = new mongoose.Schema({
@@ -30,6 +31,10 @@ const UrlSchema = new mongoose.Schema({
           name: String,
           code: String,
         },
+        name: {
+          type: String,
+          default: '',
+        },
       },
     ],
   },
@@ -41,6 +46,23 @@ const UrlSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  expirationDateTime: {
+    type: String,
+  },
+}).index({ expireAt: 1 }, { expireAfterSeconds: 0 });
+
+UrlSchema.pre('save', async function(next) {
+  if (this.accessKey) {
+    this.accessKey = await bcrypt.hash(this.accessKey, 8);
+  }
+
+  next();
+});
+
+UrlSchema.method('toJSON', function() {
+  var url = this.toObject();
+  delete url.accessKey;
+  return url;
 });
 
 export default mongoose.model('Url', UrlSchema);

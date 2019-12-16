@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
-import faker from 'faker';
-import shortid from 'shortid';
-import validateUrl from 'is-valid-http-url';
-import request from 'supertest';
 import Url from '../../src/app/models/Url';
 import app from '../../src/app';
 import connectToDb from '../../src/config/db';
+import faker from 'faker';
+import mongoose from 'mongoose';
+import request from 'supertest';
+import shortid from 'shortid';
+import validateUrl from 'is-valid-http-url';
 
 const databaseName = 'test';
 // If used, shouldn't import Url from model in this current file
@@ -43,12 +43,12 @@ describe('URL creation', () => {
       .post('/create')
       .send({ longUrl });
 
+    console.log(res.body);
+
     expect(res.status).toBe(200);
     expect(res.body.error).toBeFalsy();
     expect(res.body.longUrl).toBeTruthy();
     expect(res.body.shortUrl).toBeTruthy();
-
-
   });
 
   // legible name to the test
@@ -63,18 +63,16 @@ describe('URL creation', () => {
     expect(res.status).toBe(401);
   });
 
-
   // legible name to the test
   it(' should return 500 if URL has already been created', async () => {
-    const longUrl =
-      faker.internet.url(); // faker.internet.url();
+    const longUrl = faker.internet.url(); // faker.internet.url();
     const code = shortid.generate();
     const shortUrl = `${process.env.BASE_URL}/${code}`;
-    
+
     const url = await Url.create({
-        longUrl,
-        code,
-        shortUrl
+      longUrl,
+      code,
+      shortUrl,
     });
 
     expect(url.longUrl).toBeTruthy();
@@ -85,6 +83,5 @@ describe('URL creation', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.error).toBeTruthy();
-   
   });
 });
