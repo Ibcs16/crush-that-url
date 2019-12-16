@@ -10,7 +10,7 @@ require('dotenv').config({
 
 export default {
   async show(req, res) {
-    const { name, accessKey } = req.body;
+    const { accessKey, name } = req.query;
     const { code } = req.params;
     const shortUrl = `${process.env.BASE_URL}/${code}`;
 
@@ -39,12 +39,16 @@ export default {
       }
 
       if (url.isPrivate) {
+        if(!accessKey){
+          return res.status(401).json({ error: 'Must authenticate' });
+        }
+
         if (!(await checkAccessKey(accessKey, url.accessKey))) {
           return res.status(401).json({ error: 'Access key does not match' });
         }
       }
-
-      return res.status(302).redirect(url.longUrl);
+      return res.status(302).json({ longUrl : url.longUrl });
+      // return res.status(302).redirect(url.longUrl);
       // await client.set(`url:${code}`, url.longUrl);
     } catch (error) {
       console.error(error);

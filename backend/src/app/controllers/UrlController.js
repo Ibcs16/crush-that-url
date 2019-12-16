@@ -28,15 +28,26 @@ export default {
 
       // Generates new ID
       const code = shortid.generate();
-      url = await Url.create({
-        shortUrl: `${process.env.BASE_URL}/${code}`,
-        longUrl,
-        isPrivate,
-        accessKey,
-        code,
-        expireAt: expirationDateTime ? new Date(expirationDateTime) : 1,
-        expirationDateTime: epirationDateTime,
-      });
+      if(expirationDateTime) {
+        url = await Url.create({
+          shortUrl: `${process.env.BASE_URL}/${code}`,
+          longUrl,
+          isPrivate,
+          accessKey,
+          code,
+          expireAt: expirationDateTime ? new Date(expirationDateTime) : 1,
+          expirationDateTime: epirationDateTime,
+        });
+      } else {
+        url = await Url.create({
+          shortUrl: `${process.env.BASE_URL}/${code}`,
+          longUrl,
+          isPrivate,
+          accessKey,
+          code,
+        });
+      }
+
 
       // If not created
       if (!url) {
