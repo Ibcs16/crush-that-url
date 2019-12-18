@@ -63,25 +63,25 @@ describe('URL creation', () => {
     expect(res.status).toBe(401);
   });
 
-  // legible name to the test
-  it(' should return 500 if URL has already been created', async () => {
-    const longUrl = faker.internet.url(); // faker.internet.url();
-    const code = shortid.generate();
-    const shortUrl = `${process.env.BASE_URL}/${code}`;
+  // // legible name to the test
+  // it(' should return 500 if URL has already been created', async () => {
+  //   const longUrl = faker.internet.url(); // faker.internet.url();
+  //   const code = shortid.generate();
+  //   const shortUrl = `${process.env.BASE_URL}/${code}`;
 
-    const url = await Url.create({
-      longUrl,
-      code,
-      shortUrl,
-    });
+  //   const url = await Url.create({
+  //     longUrl,
+  //     code,
+  //     shortUrl,
+  //   });
 
-    expect(url.longUrl).toBeTruthy();
+  //   expect(url.longUrl).toBeTruthy();
 
-    const res = await request(app)
-      .post('/create')
-      .send({ longUrl });
+  //   const res = await request(app)
+  //     .post('/create')
+  //     .send({ longUrl });
 
-    expect(res.status).toBe(200);
-    expect(res.body.error).toBeTruthy();
-  });
+  //   expect(res.status).toBe(200);
+  //   expect(res.body.error).toBeTruthy();
+  // });
 });
