@@ -3,12 +3,6 @@ import bcrypt from 'bcryptjs';
 import { checkAccessKey } from '../utils/compare';
 import validateUrl from 'is-valid-http-url';
 
-// import client from '../../config/redis';
-
-require('dotenv').config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-});
-
 export default {
   async show(req, res) {
     const { accessKey, name } = req.body;

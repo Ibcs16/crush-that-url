@@ -1,10 +1,14 @@
 import connectToDb from './config/db';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
 import requestIp from 'request-ip';
 import routes from './routes';
+
+const envFile = process.env.NODE_ENV !== `test` ? `.env` : '.env.test';
+dotenv.config({ path: envFile });
 
 class AppController {
   constructor() {

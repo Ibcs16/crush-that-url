@@ -2,14 +2,6 @@ import Url from '../models/Url';
 import shortid from 'shortid';
 import validateUrl from 'is-valid-http-url';
 
-// import client from '../../config/redis';
-
-
-
-require('dotenv').config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-});
-
 export default {
   async store(req, res) {
     const { longUrl, isPrivate, accessKey, expirationDateTime } = req.body;
