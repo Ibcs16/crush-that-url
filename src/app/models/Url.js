@@ -52,7 +52,7 @@ const UrlSchema = new mongoose.Schema({
 }).index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 UrlSchema.pre('save', async function(next) {
-  if (this.accessKey) {
+  if (this.accessKey !== '') {
     this.accessKey = await bcrypt.hash(this.accessKey, 8);
   }
 
