@@ -5,13 +5,12 @@ import validateUrl from 'is-valid-http-url';
 
 export default {
   async show(req, res) {
+    const { code } = req.params;
+
     const { accessKey, name } = req.body;
 
-    const { ip } = res;
+    const { ip, browser, country } = req.body.info;
 
-    const { ip: clientIp, browser, country } = req.body.info;
-
-    const { code } = req.params;
     const shortUrl = `${process.env.BASE_URL}/${code}`;
 
     if (!validateUrl(shortUrl)) {
@@ -32,7 +31,7 @@ export default {
 
     // // If not found, send error
     try {
-      const url = await Url.findOne({ shortUrl });
+      const url = await Url.findOne({ code });
 
       if (!url) {
         return res.status(404).json({ error: 'Url not found', shortUrl });
@@ -64,7 +63,7 @@ export default {
         console.error(err);
       }
 
-      return res.status(302).json({ longUrl: url.longUrl });
+      return res.json({ longUrl: url.longUrl });
       // return res.status(302).redirect(url.longUrl);
       // await client.set(`url:${code}`, url.longUrl);
     } catch (error) {
