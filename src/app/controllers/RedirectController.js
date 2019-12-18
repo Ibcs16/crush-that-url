@@ -13,8 +13,6 @@ export default {
 
     const shortUrl = `${process.env.BASE_URL}/${code}`;
 
-    console.log(shortUrl, code);
-
     if (!validateUrl(shortUrl)) {
       return res.status(401).json({ error: 'Invalid url' });
     }
