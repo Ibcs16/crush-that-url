@@ -5,14 +5,16 @@ import validateUrl from 'is-valid-http-url';
 
 export default {
   async show(req, res) {
-    console.log(req);
     const { code } = req.params;
+    console.log(params);
 
     const { accessKey, name } = req.body;
 
     const { ip, browser, country } = req.body.info;
 
     const shortUrl = `${process.env.BASE_URL}/${code}`;
+
+    console.log(params, shortUrl);
 
     if (!validateUrl(shortUrl)) {
       return res.status(401).json({ error: 'Invalid url' });
