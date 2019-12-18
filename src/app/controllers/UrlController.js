@@ -6,13 +6,14 @@ export default {
   async store(req, res) {
     const { longUrl, isPrivate, accessKey, expirationDateTime } = req.body;
 
+    // Check if it's an actual url
     if (!validateUrl(longUrl)) {
       return res.status(401).json({ error: 'Invalid URL' });
     }
-    // Check if it's an actual url
-
+    // Generates new ID
+    const code = shortid.generate();
     try {
-      let url = await Url.findOne({ longUrl });
+      let url = await Url.findOne({ code });
 
       if (url) {
         return res.json({
@@ -21,8 +22,6 @@ export default {
         });
       }
 
-      // Generates new ID
-      const code = shortid.generate();
       if (expirationDateTime) {
         url = await Url.create({
           shortUrl: `${process.env.BASE_URL}/${code}`,
