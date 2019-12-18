@@ -5,6 +5,7 @@ import validateUrl from 'is-valid-http-url';
 
 export default {
   async show(req, res) {
+    console.log(req);
     const { code } = req.params;
 
     const { accessKey, name } = req.body;
