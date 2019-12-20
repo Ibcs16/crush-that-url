@@ -1,15 +1,38 @@
+import { endOfDay, isWithinInterval, startOfDay, subDays } from 'date-fns';
+
 import Url from '../models/Url';
 
 export default {
   async show(req, res) {
     const { code } = req.params;
-    
-    const url = await Url.findOne({code});
 
-    if(!url) {
-        return res.status(404).json({ error: 'Url not found' });
+    const url = await Url.findOne({ code });
+
+    if (!url) {
+      return res.status(404).json({ error: 'Url not found' });
     }
 
-    return res.json(url);
+    const lastSevenDays = [];
+    const currentDate = new Date();
+
+    for (let i = 0; i <= 6; i++) {
+      const accesses = url.analytics.accesses.reduce(
+        (acc, item) =>
+          isWithinInterval(item.date, {
+            start: startOfDay(subDays(currentDate, i)),
+            end: endOfDay(subDays(currentDate, i)),
+          })
+            ? acc + 1
+            : acc,
+        0
+      );
+
+      lastSevenDays.push([i, accesses]);
+    }
+
+    const urlData = url.toObject();
+    urlData.analytics.lastSevenDaysAccesses = lastSevenDays;
+
+    return res.json(urlData);
   },
 };
