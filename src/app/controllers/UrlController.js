@@ -34,7 +34,8 @@ export default {
         : addDays(Date.now(), 360);
 
       // creates new document on db
-      url = await Url.create({
+
+      let url = await Url.create({
         shortUrl: `${process.env.BASE_URL}/${code}`,
         longUrl,
         isPrivate,
