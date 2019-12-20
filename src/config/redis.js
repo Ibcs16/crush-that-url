@@ -1,4 +1,6 @@
-import redis from 'redis';
+// import redis from 'redis';
+
+import redis from 'async-redis';
 
 const client = redis.createClient();
 

@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@sentry/node": "5.7.1",
+    "async-redis": "^1.1.7",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "date-fns": "^2.6.0",
@@ -27,7 +28,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=test nodemon src/server.js",
-    "dev:debug": "nodemon --inspect src/server.js",
+    "dev:debug": "cross-env NODE_ENV=test nodemon --inspect src/server.js",
     "test": "jest",
     "build": "cross-env NODE_ENV=prod sucrase ./src -d ./dist --transforms imports",
     "start": "node dist/server.js"

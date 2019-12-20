@@ -46,10 +46,13 @@ const UrlSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  expirationDateTime: {
-    type: String,
+  expireAt: {
+    type: Date,
+    default: Date.now,
+    index: { expires: '1s' },
   },
-}).index({ expireAt: 1 }, { expireAfterSeconds: 0 });
+  created_at: { type: Date, default: Date.now },
+});
 
 UrlSchema.pre('save', async function(next) {
   if (this.accessKey !== '') {
