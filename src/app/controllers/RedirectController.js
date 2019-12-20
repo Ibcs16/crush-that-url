@@ -56,7 +56,9 @@ export default {
               ip,
               browser,
               date: Date.now(),
-              country,
+              country: {
+                code: country,
+              },
               name,
             },
           },
