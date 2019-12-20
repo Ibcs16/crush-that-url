@@ -2,7 +2,6 @@ import { addDays, differenceInSeconds } from 'date-fns';
 
 import Url from '../models/Url';
 import client from '../../config/redis';
-import promisify from 'util.promisify';
 import shortid from 'shortid';
 import validateUrl from 'is-valid-http-url';
 
@@ -31,7 +30,7 @@ export default {
       // converts expiration date, if not present, sets a default value of 1 year
       let expireAt = expirationDateTime
         ? new Date(expirationDateTime)
-        : addDays(Date.now(), 360);
+        : addDays(Date.now(), 365);
 
       // creates new document on db
 
