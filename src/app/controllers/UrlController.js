@@ -81,7 +81,7 @@ export default {
           return res.json(url);
         });
     } catch (err) {
-      return res.status(500).json({ error: 'Server error' });
+      return res.status(500).json({ error: 'Server error' + err });
     }
   },
 };
