@@ -1,4 +1,5 @@
 import Url from '../../src/app/models/Url';
+import { addDays } from 'date-fns';
 import app from '../../src/app';
 import connectToDb from '../../src/config/db';
 import faker from 'faker';
@@ -47,6 +48,7 @@ describe('URL redirection', () => {
       longUrl,
       shortUrl,
       code,
+      expireAt: addDays(new Date(), 365),
     });
 
     expect(url.longUrl).toBeTruthy();
@@ -66,6 +68,7 @@ describe('URL redirection', () => {
     // // should have redirected to long url
     // .expect('Location', longUrl);
     expect(res.status).toBe(200);
+    expect(res.body.longUrl).toBeTruthy();
   });
 
   it(' should return invalid url if short url code is invalid', async () => {
@@ -123,7 +126,7 @@ describe('URL redirection', () => {
 
     // .expect('Location', longUrl);
     expect(res.status).toBe(401);
-    expect(res.data.error).toBe('Must authenticate');
+    expect(res.body.error).toBe('Must authenticate');
   });
 
   it('should redirect if url is private and given password is right', async () => {
@@ -194,6 +197,6 @@ describe('URL redirection', () => {
 
     // .expect('Location', longUrl);
     expect(res.status).toBe(401);
-    expect(res.data.error).toBe('Access key does not match');
+    expect(res.body.error).toBe('Access key does not match');
   });
 });
