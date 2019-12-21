@@ -78,6 +78,7 @@ export default {
         .catch(err => {})
         .finally(() => {
           // returns created url
+          req.io.emit('created_url', url);
           return res.json(url);
         });
     } catch (err) {
