@@ -27,12 +27,11 @@ export default {
         0
       );
 
-      lastSevenDays.push([i, accesses]);
+      lastSevenDays.push(accesses);
     }
 
     const urlData = url.toObject();
-    urlData.analytics.lastSevenDaysAccesses = lastSevenDays;
 
-    return res.json(urlData);
+    return res.json({ url, lastSevenDays});
   },
 };
