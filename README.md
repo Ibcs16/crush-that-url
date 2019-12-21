@@ -1,2 +1,2 @@
 # crush-that-url
-Url shortener service
+Crush-that-url is a RESTful API that works alongside www.shrtn-it.com webapp
