@@ -1,6 +1,6 @@
 version: "3"
 
-service: 
+service:
     app:
         build: .
         ports:
@@ -9,9 +9,15 @@ service:
             - redis
             - mongo
         command: yarn start
+        volumes:
+          - ".:/usr/app"
     mongo:
-        container_name: crushit-mongo
-        image: 'mongo:4'
+        container_name: mongo
+        image: 'mongo'
+        ports:
+          - "27017:27017"
     redis:
-        container_name: crushit-redis
-        image: 'redis:4.0.11'
+        container_name: redis
+        image: 'redis:alpine'
+        ports:
+          - "6379:6379"
