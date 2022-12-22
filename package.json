@@ -16,7 +16,7 @@
     "faker": "^4.1.0",
     "is-valid-http-url": "^1.0.3",
     "jest": "^24.9.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.7.7",
     "redis": "^2.8.0",
     "request-ip": "^2.1.3",
